@@ -31,9 +31,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: unzip
+      - name: build
         shell: sh
-        run: gunzip site/htdocs/*.gz
+        run: |
+          docker build -t dockerfile .
+          container2wasm/c2w dockerfile site/htdocs/out.wasm
       - name: Setup Pages
         uses: actions/configure-pages@v4
       - name: Upload artifact
